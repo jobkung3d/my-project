@@ -1,29 +1,20 @@
 import React, { Component } from 'react';
-import Header from '../component/header';
-import Footer from '../component/footer';
+import Layout from '../component/layout';
+import CardElement from '../component/card';
+import '../static/css/style.css'
 
-class Layout extends Component{
-    constructor(){
-        super();
-        this.state = { date: new Date()};
-        setInterval(() => {
-            this.tick();
-        }, 1000);
-    }
-
-    tick() {
-        this.setState({ date: new Date()});
-    }
-
+class Home extends Component{
     render(){
         return(
             <div>
-                <Header />
-                Hello
-                <Footer />
+                <Layout>
+                    <div className="container">
+                        <CardElement />
+                    </div>
+                </Layout>
             </div>
         )
     }
 }
 
-export default Layout
+export default Home
