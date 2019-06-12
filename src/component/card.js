@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, CardBody, Button } from 'reactstrap';
 
 class CardElement extends Component{
     render(){
         return(
             <div>
-                <Card>
-                    <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+                <Card className="shadow-sm rounded-0">
                     <CardBody>
-                        <CardTitle>Card title</CardTitle>
-                        <CardSubtitle>Card subtitle</CardSubtitle>
-                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                        <div className="card-bar">
+                            <p>CardBar</p>    
+                        </div>
                         <Button>Button</Button>
                     </CardBody>
                 </Card>
