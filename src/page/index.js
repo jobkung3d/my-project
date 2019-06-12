@@ -14,13 +14,13 @@ class Home extends Component{
                         </div>
                         <div className="wrapper">
                             <div className="row">
-                                <div className="col-4">
+                                <div className="col-md-4">
                                     <CardElement />
                                 </div>
-                                <div className="col-4">
+                                <div className="col-md-4">
                                     <CardElement />
                                 </div>
-                                <div className="col-4">
+                                <div className="col-md-4">
                                     <CardElement />
                                 </div>
                             </div>

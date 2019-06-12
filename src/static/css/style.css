@@ -2,3 +2,12 @@
 .toolbox-controls{
     padding: 25px 0;
 }
+.crd-bar p{
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.crd-body-tag .tag{
+    color: white;
+    background-color: black; 
+}
