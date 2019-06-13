@@ -1,4 +1,7 @@
 
+body{
+    font-size: 12px;
+}
 .toolbox-controls{
     padding: 25px 0;
 }
@@ -10,4 +13,14 @@
 .crd-body-tag .tag{
     color: white;
     background-color: black; 
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%; 
+}
+.crd-body-noti .crd-sm{
+    padding: 15px 10px;
+}
+.crd-body-noti .row div:nth-child(n-1){
+    margin-right: -7px;
 }
