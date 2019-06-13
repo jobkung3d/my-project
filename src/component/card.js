@@ -19,19 +19,19 @@ class CardElement extends Component{
                             <div className="crd-body-noti my-4">
                                 <div className="row">
                                     <div className="col-md-6 mb-3">
-                                        <div className="crd-sm border rounded">
+                                        <div className="crd-sm border rounded text-center">
                                             <div className="crd-sm-number px-2 py-1"><h2 className="mb-0">1200</h2></div>
-                                            <div className="crd-sm-title text-center">Assign</div>
+                                            <div className="crd-sm-title">Assign</div>
                                         </div>
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <div className="crd-sm border rounded">
+                                        <div className="crd-sm border rounded text-center">
                                             <div className="crd-sm-number px-2 py-1"><h2 className="mb-0">1200</h2></div>
-                                            <div className="crd-sm-title text-center">Assign</div>
+                                            <div className="crd-sm-title">Assign</div>
                                         </div>
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <div className="crd-sm border rounded">
+                                        <div className="crd-sm border rounded text-center">
                                             <div className="crd-sm-number px-2 py-1"><h2 className="mb-0">1200</h2></div>
                                             <div className="crd-sm-title text-center">Assign</div>
                                         </div>

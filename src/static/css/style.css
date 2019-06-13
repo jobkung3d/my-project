@@ -16,11 +16,11 @@ body{
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 100%; 
+    max-width: 100%; 
 }
 .crd-body-noti .crd-sm{
     padding: 15px 10px;
 }
-.crd-body-noti .row div:nth-child(n-1){
+.crd-body-noti .row div.crd-sm:nth-child(n-1){
     margin-right: -7px;
 }
