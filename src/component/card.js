@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import { Card, CardBody } from 'reactstrap';
 
+class CardNotification extends Component{
+    render(){
+        const {date, title} = this.props;
+        return(
+            <div className="col-md-6 mb-3">
+                <div className="crd-sm border rounded text-center">
+                    <div className="crd-sm-number px-2 py-1"><h2 className="mb-0">{date}</h2></div>
+                    <div className="crd-sm-title">{title}</div>
+                </div>
+            </div>
+        )
+    }
+}
 class CardElement extends Component{
     render(){
         return(
@@ -18,24 +31,9 @@ class CardElement extends Component{
                             </div>
                             <div className="crd-body-noti my-4">
                                 <div className="row">
-                                    <div className="col-md-6 mb-3">
-                                        <div className="crd-sm border rounded text-center">
-                                            <div className="crd-sm-number px-2 py-1"><h2 className="mb-0">1200</h2></div>
-                                            <div className="crd-sm-title">Assign</div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6 mb-3">
-                                        <div className="crd-sm border rounded text-center">
-                                            <div className="crd-sm-number px-2 py-1"><h2 className="mb-0">1200</h2></div>
-                                            <div className="crd-sm-title">Assign</div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6 mb-3">
-                                        <div className="crd-sm border rounded text-center">
-                                            <div className="crd-sm-number px-2 py-1"><h2 className="mb-0">1200</h2></div>
-                                            <div className="crd-sm-title text-center">Assign</div>
-                                        </div>
-                                    </div>
+                                    <CardNotification date="120" title="Assign" />
+                                    <CardNotification date="320" title="Domain" />
+                                    <CardNotification date="1220" title="Email" />
                                 </div>                             
                             </div>
                         </div>
