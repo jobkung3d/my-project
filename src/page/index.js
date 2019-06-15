@@ -3,7 +3,7 @@ import Layout from '../component/layout';
 import CardElement from '../component/card';
 import '../static/css/style.css';
 import { Button } from 'reactstrap';
-import { withRouter } from 'react-router-dom';
+
 class Home extends Component{
     render(){
         return(
@@ -11,18 +11,12 @@ class Home extends Component{
                 <Layout>
                     <div className="container">
                         <div className="toolbox-controls">
-                            <Button color="primary" onClick={() => this.props.history.push('projects/add')}>Add</Button>{' '}
+                            <Button color="primary">Add</Button>{' '}
                         </div>
                         <div className="wrapper">
                             <div className="row">
                                 <div className="col-md-4">
-                                    <CardElement />
-                                </div>
-                                <div className="col-md-4">
-                                    <CardElement />
-                                </div>
-                                <div className="col-md-4">
-                                    <CardElement />
+                                    <CardElement title="Title1" date="18 MIN AGO" tag="TAG" type="project"/>
                                 </div>
                             </div>
                         </div>
