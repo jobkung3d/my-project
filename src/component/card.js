@@ -5,18 +5,26 @@ class CardNotification extends Component{
     render(){
         const {date, title} = this.props;
         return(
-            <div className="mb-2 w-100">
-                <div className="crd-sm border rounded text-center">
-                    <div className="crd-sm-number px-2 py-1"><h4 className="mb-0">{date}</h4></div>
-                    <div className="crd-sm-title">{title}</div>
-                </div>
-            </div>
+            <div className="crd-sm border rounded text-center">
+                <div className="crd-sm-number px-2 py-1"><h4 className="mb-0">{date}</h4></div>
+                <div className="crd-sm-title">{title}</div>
+            </div>   
         )
     }
 }
 class CardElement extends Component{
+
+    showCardNotification(){
+        return this.props.notification && this.props.notification.map(noti => (
+            <div className="mb-2 w-100" key={noti.notiId}>
+                <CardNotification {...noti} />
+            </div>
+        ))
+    }
+
     render(){
         const {title, date, tag, type} = this.props;
+        console.log(this.props.notification);
         return(
             <div className="mb-3">
                 <Card className="shadow-sm rounded-0">
@@ -32,9 +40,7 @@ class CardElement extends Component{
                             </div>
                             <div className="crd-body-noti my-3">
                                 <div className="d-flex justify-content-between flex-wrap">
-                                    <CardNotification date="120" title="Assign" />
-                                    <CardNotification date="320" title="Domain" />
-                                    <CardNotification date="1220" title="Email" />
+                                    {this.showCardNotification()}
                                 </div>                             
                             </div>
                         </div>

@@ -6,6 +6,28 @@ import { Button } from 'reactstrap';
 import { withRouter } from "react-router-dom";
 
 class Home extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {projects:""}
+    }
+
+    componentDidMount(){
+        this.setState({ projects :[
+            { projectId : 1, projectName: "Rem13", type: "project", date: "18 MIN AGO", tag: "Websign", notification: [{notiId: 1, title: "Domain", date: "350"}, {notiId: 2, title: "Email", date: "350"}, {notiId: 3, title: "Host", date: "980"}] },
+            { projectId : 2, projectName: "๋Jobkung3d", type: "project", date: "50 MIN AGO", tag: "Websign", notification: [{notiId: 1, title: "Domain", date: "950"}, {notiId: 2, title: "Email", date: "80"}, {notiId: 3, title: "Host", date: "500"}] },
+            { projectId : 3, projectName: "Thebeginingofsomething", type: "project", date: "25 day AGO", tag: "Facebook", notification: [{notiId: 1, title: "Bucket", date: "350"}]}
+        ]})
+    }
+
+    showProject(){
+        return this.state.projects && this.state.projects.map(project => (
+            <div className="col-md-4" key={project.projectId}>
+                <CardElement {...project}/>
+            </div>
+        ))
+    }
+
     render(){
         return(
             <div>
@@ -16,9 +38,7 @@ class Home extends Component{
                         </div>
                         <div className="wrapper">
                             <div className="row">
-                                <div className="col-md-4">
-                                    <CardElement title="Title1" date="18 MIN AGO" tag="TAG" type="project"/>
-                                </div>
+                                {this.showProject()}
                             </div>
                         </div>
                     </div>
