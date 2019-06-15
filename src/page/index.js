@@ -3,6 +3,7 @@ import Layout from '../component/layout';
 import CardElement from '../component/card';
 import '../static/css/style.css';
 import { Button } from 'reactstrap';
+import { withRouter } from "react-router-dom";
 
 class Home extends Component{
     render(){
@@ -11,7 +12,7 @@ class Home extends Component{
                 <Layout>
                     <div className="container">
                         <div className="toolbox-controls">
-                            <Button color="primary">Add</Button>{' '}
+                            <Button color="primary" onClick={() => this.props.history.push('project/add')}>Add</Button>{' '}
                         </div>
                         <div className="wrapper">
                             <div className="row">
@@ -27,4 +28,4 @@ class Home extends Component{
     }
 }
 
-export default Home
+export default withRouter(Home)
