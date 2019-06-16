@@ -24,7 +24,6 @@ class CardElement extends Component{
 
     render(){
         const {title, date, tag, type} = this.props;
-        console.log(this.props.notification);
         return(
             <div className="mb-3">
                 <Card className="shadow-sm rounded-0">
