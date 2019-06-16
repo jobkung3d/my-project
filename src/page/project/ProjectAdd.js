@@ -6,11 +6,6 @@ import { Button, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 
 class ProjectAdd extends Component{
-    constructor(props){
-        super(props);
-        this.state = {}
-        console.log(props);
-    }
 
     render(){
         return(

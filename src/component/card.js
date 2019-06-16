@@ -23,7 +23,7 @@ class CardElement extends Component{
     }
 
     render(){
-        const {title, date, tag, type} = this.props;
+        const {projectName, date, tag, type} = this.props;
         return(
             <div className="mb-3">
                 <Card className="shadow-sm rounded-0">
@@ -33,7 +33,7 @@ class CardElement extends Component{
                             <p className="float-right mb-2">{date}</p>
                         </div>
                         <div className="crd-body">
-                            <h5 className="mt-0 mb-2">{title}</h5>
+                            <h5 className="mt-0 mb-2">{projectName}</h5>
                             <div className="crd-body-tag">
                               <div className="tag rounded px-3 py-2 d-inline-block text-uppercase">{tag}</div>
                             </div>

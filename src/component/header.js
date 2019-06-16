@@ -16,11 +16,17 @@ class Header extends Component{
             date: new Date(),
             isOpen: false
         };
-        setInterval(() => {
+        
+        this.timerID = setInterval(() => {
             this.tick();
         }, 1000);
 
         this.toggle = this.toggle.bind(this);
+    }
+
+    
+    componentWillUnmount(){
+        clearInterval(this.timerID);
     }
 
     tick() {
