@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Layout from '../../component/layout';
 import { Button, Form, FormGroup, Label, Input, 
          Container, Row, Col,
-         CardHeader, Card, CardBody 
+         CardHeader, Card, CardBody, Jumbotron 
 } from 'reactstrap';
 
 class ProjectAdd extends Component{
 
     render(){
         return(
-            <Layout className="py-5">
+            <Layout>
                 <Container>
                     <Row>
                         <Col md={{ size: 6, offset: 3 }}>
@@ -36,10 +36,21 @@ class ProjectAdd extends Component{
                                             <Label for="projectNote">Note</Label>
                                             <Input type="text" name="projectNote" id="projectNote" />
                                         </FormGroup>
-                                        <FormGroup>
-                                            <Label for="projectNoti">Notification</Label>
-                                            <Input type="text" name="projectNoti" id="projectNoti" />
-                                        </FormGroup>
+                                        <Jumbotron>
+                                            <Label><h4>Expire</h4></Label>
+                                            <FormGroup>
+                                                <Label for="projectNotiSupportDomain">Domain Date</Label>
+                                                <Input type="text" name="projectNotiSupportDomain" id="projectNotiSupportDomain" />
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Label for="projectNotiSupportDate">Support Date</Label>
+                                                <Input type="text" name="projectNotiSupportDate" id="projectNotiSupportDate" />
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Label for="projectNotiHostDate">Host Date</Label>
+                                                <Input type="text" name="projectNotiHostDate" id="projectNotiHostDate" />
+                                            </FormGroup>  
+                                        </Jumbotron>    
                                         <Button color="primary">Submit</Button>
                                     </Form>
                                 </CardBody>

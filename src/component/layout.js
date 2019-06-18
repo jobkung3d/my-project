@@ -4,11 +4,11 @@ import Footer from './footer';
 
 class Layout extends Component{
     render(){
-        const { children, className } = this.props; 
+        const { children } = this.props; 
         return(
             <div>
                 <Header />
-                    <div className={className} >
+                    <div className="py-5">
                         { children }
                     </div>
                 <Footer />

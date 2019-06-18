@@ -6,7 +6,7 @@ class CardNotification extends Component{
         const {date, title} = this.props;
         return(
             <div className="crd-sm border rounded text-center">
-                <div className="crd-sm-number px-2 py-1"><h4 className="mb-0">{date}</h4></div>
+                <div className="crd-sm-number px-2 py-1"><h5 className="mb-0">{date}</h5></div>
                 <div className="crd-sm-title">{title}</div>
             </div>   
         )
@@ -16,7 +16,7 @@ class CardElement extends Component{
 
     showCardNotification(){
         return this.props.notification && this.props.notification.map(noti => (
-            <div className="mb-2 w-100" key={noti.notiId}>
+            <div className="col mb-2" key={noti.notiId} style={{minWidth:'80px'}}>
                 <CardNotification {...noti} />
             </div>
         ))
@@ -38,12 +38,13 @@ class CardElement extends Component{
                               <div className="tag rounded px-3 py-2 d-inline-block text-uppercase">{tag}</div>
                             </div>
                             <div className="crd-body-noti my-3">
-                                <div className="d-flex justify-content-between flex-wrap">
+                                <div className="row">
                                     {this.showCardNotification()}
                                 </div>                             
                             </div>
                         </div>
                         <div className="crd-footer">
+                            <p>Footer</p>
                         </div>
                     </CardBody>
                 </Card>
