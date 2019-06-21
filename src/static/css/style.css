@@ -1,0 +1,23 @@
+
+body{
+    font-size: 12px;
+}
+.crd-bar p{
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.crd-body-tag .tag{
+    color: white;
+    background-color: black; 
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; 
+}
+.crd-body-noti .crd-sm{
+    padding: 10px;
+}
+.crd-body-noti .row div.crd-sm:nth-child(n-1){
+    margin-right: -7px;
+}
