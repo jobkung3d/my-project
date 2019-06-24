@@ -6,8 +6,28 @@ import { Button, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 
 class ProjectAdd extends Component{
+    constructor(props){
+        super(props)
+
+        this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleSubmit      = this.handleSubmit.bind(this)
+    }
+
+    handleSubmit(event){
+        alert('Your Project Name is: ' + this.state.projectName);
+        event.preventDefault();
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({[name]: value})
+    }
 
     render(){
+        console.log(this.state);
         return(
             <Layout>
                 <Container>
@@ -16,39 +36,39 @@ class ProjectAdd extends Component{
                         <Card className="shadow-sm rounded-0">
                                 <CardHeader><h5>Header</h5></CardHeader>
                                 <CardBody>
-                                    <Form>
+                                    <Form onSubmit={this.handleSubmit} >
                                         <FormGroup>
                                             <Label for="projectName">Project Name</Label>
-                                            <Input type="text" name="projectName" id="projectName" />
+                                            <Input type="text" name="projectName" id="projectName" onChange={this.handleInputChange} />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="projectType">Type</Label>
-                                            <Input type="select" name="projectType" id="projectType">
+                                            <Input type="select" name="projectType" id="projectType" onChange={this.handleInputChange}>
                                                 <option></option>
                                                 <option value="project">Project</option>
                                             </Input>
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="projectTag">Tag</Label>
-                                            <Input type="text" name="projectTag" id="projectTag" />
+                                            <Input type="text" name="projectTag" id="projectTag" onChange={this.handleInputChange} />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="projectNote">Note</Label>
-                                            <Input type="text" name="projectNote" id="projectNote" />
+                                            <Input type="text" name="projectNote" id="projectNote" onChange={this.handleInputChange} />
                                         </FormGroup>
                                         <Jumbotron>
                                             <Label><h4>Expire</h4></Label>
                                             <FormGroup>
                                                 <Label for="projectNotiSupportDomain">Domain Date</Label>
-                                                <Input type="text" name="projectNotiSupportDomain" id="projectNotiSupportDomain" />
+                                                <Input type="text" name="projectNotiSupportDomain" id="projectNotiSupportDomain" onChange={this.handleInputChange} />
                                             </FormGroup>
                                             <FormGroup>
                                                 <Label for="projectNotiSupportDate">Support Date</Label>
-                                                <Input type="text" name="projectNotiSupportDate" id="projectNotiSupportDate" />
+                                                <Input type="text" name="projectNotiSupportDate" id="projectNotiSupportDate" onChange={this.handleInputChange} />
                                             </FormGroup>
                                             <FormGroup>
                                                 <Label for="projectNotiHostDate">Host Date</Label>
-                                                <Input type="text" name="projectNotiHostDate" id="projectNotiHostDate" />
+                                                <Input type="text" name="projectNotiHostDate" id="projectNotiHostDate" onChange={this.handleInputChange} />
                                             </FormGroup>  
                                         </Jumbotron>    
                                         <Button color="primary">Submit</Button>
