@@ -4,7 +4,7 @@ import CardElement from '../component/card';
 import '../static/css/style.css';
 import { Button } from 'reactstrap';
 import { withRouter } from "react-router-dom";
-
+import firebase from '../firebase';
 
 class Home extends Component{
 
@@ -19,8 +19,30 @@ class Home extends Component{
             { projectId : 2, projectName: "Jobkung3d", type: "project", date: "50 MIN AGO", tag: "Websign", notification: [{notiId: 1, title: "Domain", date: "950"}, {notiId: 2, title: "Support", date: "80"}, {notiId: 3, title: "Host", date: "500"}] },
             { projectId : 3, projectName: "Thebeginingofsomething", type: "project", date: "25 day AGO", tag: "Facebook", notification: [{notiId: 1, title: "Bucket", date: "350"}]}
         ]})
-    }
 
+        var projectsRef = firebase.database().ref('projects');
+        projectsRef.on('value', function(snapshot) {
+            console.log(snapshot.val())
+            //updateStarCount(postElement, snapshot.val());
+            /*this.setState({ projects :[
+
+            ]})*/
+
+        });
+    }
+    /*getData(values){
+        let messagesVal = values;
+        let messages = _(messagesVal)
+                        .keys()
+                        .map(messageKey => {
+                            let cloned = _.clone(messagesVal[messageKey]);
+                            cloned.key = messageKey;
+                            return cloned;
+                        }).value();
+        this.setState({
+            messages: messages
+        });
+    }*/
     showProject(){
         return this.state.projects && this.state.projects.map(project => (
             <div className="col-md-4" key={project.projectId}>

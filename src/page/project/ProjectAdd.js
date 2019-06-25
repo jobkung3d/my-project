@@ -4,6 +4,7 @@ import { Button, Form, FormGroup, Label, Input,
          Container, Row, Col,
          CardHeader, Card, CardBody, Jumbotron 
 } from 'reactstrap';
+import firebase from '../../firebase';
 
 class ProjectAdd extends Component{
     constructor(props){
@@ -14,7 +15,20 @@ class ProjectAdd extends Component{
     }
 
     handleSubmit(event){
-        alert('Your Project Name is: ' + this.state.projectName);
+
+        const { projectName, projectType, projectTag, projectNote, projectNotiSupportDomain, projectNotiSupportDate, projectNotiHostDate  } = this.state
+        const projectID = firebase.database().ref().child('projects').push().key;
+
+        firebase.database().ref('projects/'+ projectID).set({
+            project_name: projectName,
+            project_type: projectType,
+            project_tag: projectTag,
+            project_note: projectNote,
+            project_noti_support_domain: projectNotiSupportDomain,
+            project_noti_support_date: projectNotiSupportDate,
+            project_noti_host_date: projectNotiHostDate,
+        });
+
         event.preventDefault();
     }
 
@@ -27,7 +41,6 @@ class ProjectAdd extends Component{
     }
 
     render(){
-        console.log(this.state);
         return(
             <Layout>
                 <Container>
