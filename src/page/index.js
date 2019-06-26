@@ -27,17 +27,21 @@ class Home extends Component{
                     projects : snapshot.val()
                 })
             }
-        });
+        }); 
     }
     showProject(){
-        return this.state.projects && this.state.projects.map(project => (
-            <div className="col-md-4" key={project.projectId}>
+       /* return this.state.projects && this.state.projects.map(project => (
+            <div className="col-md-4" key={project}>
                 <CardElement {...project}/>
             </div>
-        ))
+        ))*/
     }
 
     render(){
+        /*this.state.projects.forEach((item, index)=>{
+            console.log(item);
+        })*/
+        console.log(this.state.projects);
         return(
             <div>
                 <Layout>
