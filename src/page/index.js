@@ -14,35 +14,21 @@ class Home extends Component{
     }
 
     componentDidMount(){
-        this.setState({ projects :[
+        /*this.setState({ projects :[
             { projectId : 1, projectName: "Rem13", type: "project", date: "18 MIN AGO", tag: "Websign", notification: [{notiId: 1, title: "Domain", date: "350"}, {notiId: 2, title: "Support", date: "350"}, {notiId: 3, title: "Host", date: "9980"}] },
             { projectId : 2, projectName: "Jobkung3d", type: "project", date: "50 MIN AGO", tag: "Websign", notification: [{notiId: 1, title: "Domain", date: "950"}, {notiId: 2, title: "Support", date: "80"}, {notiId: 3, title: "Host", date: "500"}] },
             { projectId : 3, projectName: "Thebeginingofsomething", type: "project", date: "25 day AGO", tag: "Facebook", notification: [{notiId: 1, title: "Bucket", date: "350"}]}
-        ]})
-
+        ]})*/
+        const that = this
         var projectsRef = firebase.database().ref('projects');
         projectsRef.on('value', function(snapshot) {
-            console.log(snapshot.val())
-            //updateStarCount(postElement, snapshot.val());
-            /*this.setState({ projects :[
-
-            ]})*/
-
+            if(snapshot.val() != null){
+                that.setState({
+                    projects : snapshot.val()
+                })
+            }
         });
     }
-    /*getData(values){
-        let messagesVal = values;
-        let messages = _(messagesVal)
-                        .keys()
-                        .map(messageKey => {
-                            let cloned = _.clone(messagesVal[messageKey]);
-                            cloned.key = messageKey;
-                            return cloned;
-                        }).value();
-        this.setState({
-            messages: messages
-        });
-    }*/
     showProject(){
         return this.state.projects && this.state.projects.map(project => (
             <div className="col-md-4" key={project.projectId}>
