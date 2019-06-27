@@ -9,6 +9,16 @@ import firebase from '../../firebase';
 class ProjectAdd extends Component{
     constructor(props){
         super(props)
+        
+        this.state = {
+            projectName: '',
+            projectType: '',
+            projectTag: '',
+            projectNote: '',
+            projectNotiSupportDomain: '',
+            projectNotiHostDate: '',
+            projectNotiSupportDate: ''
+        }
 
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit      = this.handleSubmit.bind(this)
@@ -19,20 +29,33 @@ class ProjectAdd extends Component{
         
         const { projectName, projectType, projectTag, projectNote, projectNotiSupportDomain, projectNotiSupportDate, projectNotiHostDate  } = this.state
         const projectID = firebase.database().ref().child('projects').push().key;
+        const NotificationID = firebase.database().ref().child('project_noti').push().key;
 
         firebase.database().ref('projects/'+ projectID).set({
-            project_name: projectName,
-            project_type: projectType,
-            project_tag: projectTag,
-            project_note: projectNote,
-            project_noti: {
-                project_noti_support_domain: projectNotiSupportDomain,
-                project_noti_support_date: projectNotiSupportDate,
-                project_noti_host_date: projectNotiHostDate,
-            }
-            
+           project_name: projectName,
+           project_type: projectType,
+           project_tag: projectTag,
+           project_note: projectNote,
+           project_date: new Date().toLocaleString(),
+           project_noti: {
+               [NotificationID]: {
+                    project_noti_support_domain: {
+                        title : 'Domain',
+                        value : projectNotiSupportDomain
+                    },
+                    project_noti_host_date: {
+                        title : 'Host',
+                        value : projectNotiHostDate
+                    },
+                    project_noti_support_date: {
+                        title : 'Support',
+                        value : projectNotiSupportDate
+                    },
+               }
+           }  
         });
-
+        
+        
         event.preventDefault();
     }
 

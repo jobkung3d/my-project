@@ -18,6 +18,3 @@ body{
 .crd-body-noti .crd-sm{
     padding: 10px;
 }
-.crd-body-noti .row div.crd-sm:nth-child(n-1){
-    margin-right: -7px;
-}
