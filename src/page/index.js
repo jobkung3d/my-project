@@ -27,21 +27,21 @@ class Home extends Component{
                     projects : snapshot.val()
                 })
             }
-        }); 
+        });
     }
     showProject(){
-       /* return this.state.projects && this.state.projects.map(project => (
-            <div className="col-md-4" key={project}>
-                <CardElement {...project}/>
+        // Firebase retun ค่ากลับมาเป็น Object 
+        // ทำให้ .map ไม่ได้ ต้องใช้ Object.keys() เข้าช่วย
+
+        const { projects } = this.state
+        return projects && Object.keys(projects).map((project, index) => (
+            <div className="col-md-4" key={index}>
+                <CardElement {...projects[project]}/>
             </div>
-        ))*/
+        ))
     }
 
     render(){
-        /*this.state.projects.forEach((item, index)=>{
-            console.log(item);
-        })*/
-        console.log(this.state.projects);
         return(
             <div>
                 <Layout>

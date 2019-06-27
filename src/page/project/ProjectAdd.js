@@ -16,6 +16,7 @@ class ProjectAdd extends Component{
 
     handleSubmit(event){
 
+        
         const { projectName, projectType, projectTag, projectNote, projectNotiSupportDomain, projectNotiSupportDate, projectNotiHostDate  } = this.state
         const projectID = firebase.database().ref().child('projects').push().key;
 
@@ -24,9 +25,12 @@ class ProjectAdd extends Component{
             project_type: projectType,
             project_tag: projectTag,
             project_note: projectNote,
-            project_noti_support_domain: projectNotiSupportDomain,
-            project_noti_support_date: projectNotiSupportDate,
-            project_noti_host_date: projectNotiHostDate,
+            project_noti: {
+                project_noti_support_domain: projectNotiSupportDomain,
+                project_noti_support_date: projectNotiSupportDate,
+                project_noti_host_date: projectNotiHostDate,
+            }
+            
         });
 
         event.preventDefault();
