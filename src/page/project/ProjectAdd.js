@@ -2,31 +2,55 @@ import React, { Component } from 'react';
 import Layout from '../../component/layout';
 import { Button, Form, FormGroup, Label, Input, 
          Container, Row, Col,
-         CardHeader, Card, CardBody, Jumbotron 
+         CardHeader, Card, CardBody, Jumbotron, Alert 
 } from 'reactstrap';
 import firebase from '../../firebase';
+
+const initialState = {
+    projectName: '',
+    projectType: '',
+    projectTag: '',
+    projectNote: '',
+    projectNotiSupportDomain: '',
+    projectNotiHostDate: '',
+    projectNotiSupportDate: '',
+    alertMessage:'',
+}
 
 class ProjectAdd extends Component{
     constructor(props){
         super(props)
         
-        this.state = {
-            projectName: '',
-            projectType: '',
-            projectTag: '',
-            projectNote: '',
-            projectNotiSupportDomain: '',
-            projectNotiHostDate: '',
-            projectNotiSupportDate: ''
-        }
+        this.state = initialState
 
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit      = this.handleSubmit.bind(this)
     }
+    validationForm = () => {
+        let { projectName, projectType, projectTag } = this.state
+        let message = '';
+        let bfail = false;
+        let alertMessage = '';
+
+        if(!projectName){ message = 'กรุณากรอกชื่อโปรเจค'; bfail = true; }
+        else if(!projectType){ message = 'กรุณากรอกประเภทโปรเจค'; bfail = true; }
+        else if(!projectTag){ message = 'กรุณากรอกแท๊กโปรเจค'; bfail = true; }
+
+        if(bfail){
+            alertMessage = ( <Alert color="danger">{message}</Alert> )
+            this.setState({alertMessage});
+            return false
+        }else{
+            alertMessage = ( <Alert color="success">เพิ่มโปรเจคเสร็จสมบูรณ์</Alert> )
+            this.setState({alertMessage});
+        }
+        
+        return true
+    }
 
     handleSubmit(event){
 
-        
+        /*
         const { projectName, projectType, projectTag, projectNote, projectNotiSupportDomain, projectNotiSupportDate, projectNotiHostDate  } = this.state
         const projectID = firebase.database().ref().child('projects').push().key;
         const NotificationID = firebase.database().ref().child('project_noti').push().key;
@@ -53,7 +77,7 @@ class ProjectAdd extends Component{
                     },
                }
            }  
-        });
+        }); */
         
         
         event.preventDefault();
@@ -71,8 +95,10 @@ class ProjectAdd extends Component{
         return(
             <Layout>
                 <Container>
+                     
                     <Row>
                         <Col md={{ size: 6, offset: 3 }}>
+                        { this.state.errorMessage }
                         <Card className="shadow-sm rounded-0">
                                 <CardHeader><h5>Header</h5></CardHeader>
                                 <CardBody>
