@@ -46,7 +46,7 @@ class Home extends Component{
             <div>
                 <Layout>
                     <div className="container">
-                        <div className="toolbox-controls pb-4">
+                        <div className="toolbox-controls mb-3 pb-3 border-bottom">
                             <Button color="primary" onClick={() => this.props.history.push('project/add')}>Add</Button>{' '}
                         </div>
                         <div className="wrapper">

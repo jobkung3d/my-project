@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
     Collapse,
     Navbar,
@@ -42,7 +43,7 @@ class Header extends Component{
         return(
             <div>
                 <Navbar color="light" light expand="md">
-                <NavbarBrand>Project Manager</NavbarBrand>
+                <NavbarBrand tag={Link} to={'/'}>Project Manager</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>

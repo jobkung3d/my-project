@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import Layout from '../../component/layout';
+import React, { Component } from 'react'
+import Layout from '../../component/layout'
 import { Button, Form, FormGroup, Label, Input, 
          Container, Row, Col,
          CardHeader, Card, CardBody, Jumbotron, Alert 
-} from 'reactstrap';
-import firebase from '../../firebase';
+} from 'reactstrap'
+import { Link } from 'react-router-dom'
+import firebase from '../../firebase'
 
 const initialState = {
     projectName: '',
@@ -54,15 +55,16 @@ class ProjectAdd extends Component{
         if(isValid){     
         
             const { projectName, projectType, projectTag, projectNote, projectNotiSupportDomain, projectNotiSupportDate, projectNotiHostDate  } = this.state
-            const projectID = firebase.database().ref().child('projects').push().key;
-            const NotificationID = firebase.database().ref().child('project_noti').push().key;
+            const projectID = firebase.database().ref().child('projects').push().key
+            const NotificationID = firebase.database().ref().child('project_noti').push().key
+            const getFullDate = new Date().getDate()+'/'+ new Date().getMonth() + '/' + new Date().getFullYear()
 
             firebase.database().ref('projects/'+ projectID).set({
                 project_name: projectName,
                 project_type: projectType,
                 project_tag: projectTag,
                 project_note: projectNote,
-                project_date: new Date().toLocaleString(),
+                project_date: getFullDate,
                 project_noti: {
                     [NotificationID]: {
                         project_noti_support_domain: {
@@ -97,7 +99,6 @@ class ProjectAdd extends Component{
     }
 
     render(){
-        console.log(new Date().getDate());
         return(
             <Layout>
                 <Container>
@@ -142,7 +143,8 @@ class ProjectAdd extends Component{
                                                 <Input type="text" name="projectNotiHostDate" id="projectNotiHostDate" onChange={this.handleInputChange} value={this.state.projectNotiHostDate} />
                                             </FormGroup>  
                                         </Jumbotron>    
-                                        <Button color="primary">Submit</Button>
+                                        <Button outline tag={Link} to="/">Back</Button>
+                                        <Button color="primary" className="float-right"align="right">Submit</Button>
                                     </Form>
                                 </CardBody>
                             </Card>
