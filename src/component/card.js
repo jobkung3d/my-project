@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Card, CardBody } from 'reactstrap';
+import { Card, CardBody, Button } from 'reactstrap';
+import firebase from '../firebase';
 
 class CardNotification extends Component{
     render(){
@@ -14,17 +15,33 @@ class CardNotification extends Component{
 }
 class CardElement extends Component{
 
-    showCardNotification(){
+    constructor(props){
+        super(props)
+
+        this.handleRemove = this.handleRemove.bind(this)
+    }
+
+    showCardNotification(){ 
         const {project_noti} = this.props
         return Object.keys(project_noti) && Object.keys(project_noti).map(noti => (
                     Object.keys(project_noti[noti]) && Object.keys(project_noti[noti]).map((value, index) => (
                         <div className="col mb-2" key={index} style={{minWidth:'80px'}}>
-                            <CardNotification {...project_noti[noti][value]} />
+                            {
+                                project_noti[noti][value].value ? (
+                                    <CardNotification {...project_noti[noti][value]} />
+                                ) : ''
+                            }
                         </div>
                 ))
         ))
 
        
+    }
+
+    handleRemove() {    
+        if(window.confirm('ยืนยันการลบ')){
+            return firebase.database().ref('projects').child(this.props.keyPrg).remove();
+        }
     }
 
     render(){
@@ -48,8 +65,8 @@ class CardElement extends Component{
                                 </div>                             
                             </div>
                         </div>
-                        <div className="crd-footer">
-                            <p>Footer</p>
+                        <div className="crd-footer text-right">
+                            <Button outline color="danger" size="sm" onClick={this.handleRemove}> Delete </Button>
                         </div>
                     </CardBody>
                 </Card>

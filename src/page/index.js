@@ -36,7 +36,7 @@ class Home extends Component{
         const { projects } = this.state
         return projects && Object.keys(projects).map((project, index) => (
             <div className="col-md-4" key={index}>
-                <CardElement {...projects[project]}/>
+                <CardElement {...projects[project]} keyPrg={project} />
             </div>
         ))
     }
