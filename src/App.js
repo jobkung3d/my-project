@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Home from './page';
-import Project from './page/project/ProjectAdd';
+import ProjectAdd from './page/project/ProjectAdd';
+import ProjectEdit from './page/project/ProjectEdit';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 class App extends Component{
@@ -8,7 +9,8 @@ class App extends Component{
     return (
       <Switch>
         <Route exact path="/"  component={Home} />
-        <Route path="/project/add" component={Project} />
+        <Route path="/project/add" component={ProjectAdd} />
+        <Route path="/project/edit/:id" component={ProjectEdit} />
       </Switch>
     )
   }

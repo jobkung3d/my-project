@@ -17,16 +17,47 @@ const initialState = {
     projectNotiSupportDate: '',
 }
 
-class ProjectAdd extends Component{
+class ProjectEdit extends Component{
     constructor(props){
         super(props)
-        
         this.state = initialState
-
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit      = this.handleSubmit.bind(this)
     }
-    
+    componentDidMount(){
+        const that = this
+        const projectsRef = firebase.database().ref('projects').child(this.props.match.params.id);
+        projectsRef.on('value', function(snapshot) {
+            if(snapshot.val() != null){
+
+                const { project_name, project_type, project_tag, project_note } = snapshot.val()
+                that.setState({
+                    projectName: project_name,
+                    projectType: project_type,
+                    projectTag:  project_tag,
+                    projectNote: project_note,
+                    projectNotiSupportDomain: '',
+                    projectNotiHostDate: '',
+                    projectNotiSupportDate: '',
+                })
+
+                //Object.keys
+                const projectNoti = snapshot.val().project_noti;
+                Object.keys(projectNoti).forEach((value)=>{
+                    that.setState({
+                        projectNoti : {
+                            [value] : {
+                                projectNotiSupportDomain: projectNoti[value].project_noti_support_domain,
+                                projectNotiHostDate: projectNoti[value].project_noti_host_date,
+                                projectNotiSupportDate: projectNoti[value].project_noti_support_date,
+                            }                         
+                        }              
+                    })
+                })
+            }
+        });
+    }
+
     validationForm = () => {  
         let { projectName, projectType, projectTag } = this.state
         let message = '';
@@ -54,12 +85,12 @@ class ProjectAdd extends Component{
         const isValid = this.validationForm();
         if(isValid){     
         
-            const { projectName, projectType, projectTag, projectNote, projectNotiSupportDomain, projectNotiSupportDate, projectNotiHostDate  } = this.state
-            const projectID = firebase.database().ref().child('projects').push().key
-            const NotificationID = firebase.database().ref().child('project_noti').push().key
-            const getFullDate = new Date().getDate()+'/'+ (new Date().getMonth()+1) + '/' + new Date().getFullYear()
+            const { projectName, projectType, projectTag, projectNote, projectNoti  } = this.state
+            const projectID = this.props.match.params.id
+            const NotificationID =  Object.keys(projectNoti)
+            const getFullDate = new Date().getDate()+'/'+ new Date().getMonth() + '/' + new Date().getFullYear()
 
-            firebase.database().ref('projects/'+ projectID).set({
+            firebase.database().ref('projects/'+ projectID).update({
                 project_name: projectName,
                 project_type: projectType,
                 project_tag: projectTag,
@@ -69,22 +100,19 @@ class ProjectAdd extends Component{
                     [NotificationID]: {
                         project_noti_support_domain: {
                             title : 'Domain',
-                            value : projectNotiSupportDomain
+                            value : projectNoti[NotificationID].projectNotiSupportDomain.value
                         },
                         project_noti_host_date: {
                             title : 'Host',
-                            value : projectNotiHostDate
+                            value : projectNoti[NotificationID].projectNotiHostDate.value
                         },
                         project_noti_support_date: {
                             title : 'Support',
-                            value : projectNotiSupportDate
+                            value : projectNoti[NotificationID].projectNotiSupportDate.value
                         },
                     }
                 }  
             });
-
-            // Clear Value
-            this.setState(initialState);
         }
         window.scrollTo(0, 0)
         event.preventDefault();
@@ -98,11 +126,27 @@ class ProjectAdd extends Component{
         this.setState({[name]: value})
     }
 
-    componentWillUnmount() {
-        this.setState(initialState)
+    showNotification(){
+        return (
+            <Jumbotron>
+                <Label><h4>Expire</h4></Label>
+            <FormGroup>
+                <Label for="projectNotiSupportDomain">Domain Date</Label>
+                <Input type="text" name="projectNotiSupportDomain" id="projectNotiSupportDomain" onChange={this.handleInputChange} value={this.state.projectNotiSupportDomain} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="projectNotiSupportDate">Support Date</Label>
+                <Input type="text" name="projectNotiSupportDate" id="projectNotiSupportDate" onChange={this.handleInputChange} value={this.state.projectNotiSupportDate} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="projectNotiHostDate">Host Date</Label>
+                <Input type="text" name="projectNotiHostDate" id="projectNotiHostDate" onChange={this.handleInputChange} value={this.state.projectNotiHostDate} />
+            </FormGroup> 
+            </Jumbotron>
+        )
     }
-    render(){
-        return(
+    render(){ 
+        return( 
             <Layout>
                 <Container>
                     <Row>
@@ -131,21 +175,9 @@ class ProjectAdd extends Component{
                                             <Label for="projectNote">Note</Label>
                                             <Input type="text" name="projectNote" id="projectNote" onChange={this.handleInputChange} value={this.state.projectNote} />
                                         </FormGroup>
-                                        <Jumbotron>
-                                            <Label><h4>Expire</h4></Label>
-                                            <FormGroup>
-                                                <Label for="projectNotiSupportDomain">Domain Date</Label>
-                                                <Input type="text" name="projectNotiSupportDomain" id="projectNotiSupportDomain" onChange={this.handleInputChange} value={this.state.projectNotiSupportDomain} />
-                                            </FormGroup>
-                                            <FormGroup>
-                                                <Label for="projectNotiSupportDate">Support Date</Label>
-                                                <Input type="text" name="projectNotiSupportDate" id="projectNotiSupportDate" onChange={this.handleInputChange} value={this.state.projectNotiSupportDate} />
-                                            </FormGroup>
-                                            <FormGroup>
-                                                <Label for="projectNotiHostDate">Host Date</Label>
-                                                <Input type="text" name="projectNotiHostDate" id="projectNotiHostDate" onChange={this.handleInputChange} value={this.state.projectNotiHostDate} />
-                                            </FormGroup>  
-                                        </Jumbotron>    
+                                        
+                                        { this.showNotification() }
+                                        
                                         <Button outline tag={Link} to="/">Back</Button>
                                         <Button color="primary" className="float-right" align="right">Submit</Button>
                                     </Form>
@@ -159,4 +191,4 @@ class ProjectAdd extends Component{
     }
 }
 
-export default ProjectAdd
+export default ProjectEdit

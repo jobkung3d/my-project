@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardBody, Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import firebase from '../firebase';
 
 class CardNotification extends Component{
@@ -41,7 +42,7 @@ class CardElement extends Component{
     }
 
     render(){
-        const {project_name, project_date, project_tag, project_type} = this.props;
+        const {project_name, project_date, project_tag, project_type, keyPrg} = this.props;
         return(
             <div className="mb-3">
                 <Card className="shadow-sm rounded-0">
@@ -62,6 +63,7 @@ class CardElement extends Component{
                             </div>
                         </div>
                         <div className="crd-footer text-right">
+                           <Button outline size="sm" className="mr-2" tag={Link} to={"Project/Edit/" + keyPrg}> Edit </Button>
                             <Button outline color="danger" size="sm" onClick={this.handleRemove}> Delete </Button>
                         </div>
                     </CardBody>
