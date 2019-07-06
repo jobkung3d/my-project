@@ -12,9 +12,7 @@ const initialState = {
     projectType: '',
     projectTag: '',
     projectNote: '',
-    projectNotiSupportDomain: '',
-    projectNotiHostDate: '',
-    projectNotiSupportDate: '',
+    projectNoti: ''
 }
 
 class ProjectEdit extends Component{
@@ -23,6 +21,8 @@ class ProjectEdit extends Component{
         this.state = initialState
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit      = this.handleSubmit.bind(this)
+        this.handleInputNotiChange = this.handleInputNotiChange.bind(this)
+        
     }
     componentDidMount(){
         const that = this
@@ -36,9 +36,7 @@ class ProjectEdit extends Component{
                     projectType: project_type,
                     projectTag:  project_tag,
                     projectNote: project_note,
-                    projectNotiSupportDomain: '',
-                    projectNotiHostDate: '',
-                    projectNotiSupportDate: '',
+                    projectNoti: '',
                 })
 
                 //Object.keys
@@ -126,26 +124,47 @@ class ProjectEdit extends Component{
         this.setState({[name]: value})
     }
 
+    handleInputNotiChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        const key  = target.getAttribute('data-key');
+        
+        
+        //this.state.projectNoti[key][name].value = value
+
+
+        this.setState({
+            projectNoti : this.state.projectNoti
+        })
+        
+    }
+
+
     showNotification(){
-        return (
-            <Jumbotron>
-                <Label><h4>Expire</h4></Label>
-            <FormGroup>
-                <Label for="projectNotiSupportDomain">Domain Date</Label>
-                <Input type="text" name="projectNotiSupportDomain" id="projectNotiSupportDomain" onChange={this.handleInputChange} value={this.state.projectNotiSupportDomain} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="projectNotiSupportDate">Support Date</Label>
-                <Input type="text" name="projectNotiSupportDate" id="projectNotiSupportDate" onChange={this.handleInputChange} value={this.state.projectNotiSupportDate} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="projectNotiHostDate">Host Date</Label>
-                <Input type="text" name="projectNotiHostDate" id="projectNotiHostDate" onChange={this.handleInputChange} value={this.state.projectNotiHostDate} />
-            </FormGroup> 
-            </Jumbotron>
-        )
+        const { projectNoti } = this.state
+        return Object.keys(projectNoti) && Object.keys(projectNoti).map(noti => ( 
+                <Jumbotron key={noti}>
+                    <Label><h4>Expire</h4></Label>
+                    <FormGroup>
+                        <Label for="projectNotiSupportDomain">Domain Date</Label>
+                        <Input type="text" name="projectNotiSupportDomain" id="projectNotiSupportDomain" data-key={noti} onChange={this.handleInputNotiChange} value={this.state.projectNoti[noti].projectNotiSupportDomain.value} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="projectNotiSupportDate">Support Date</Label>
+                        <Input type="text" name="projectNotiSupportDate" id="projectNotiSupportDate" data-key={noti} onChange={this.handleInputNotiChange} value={this.state.projectNoti[noti].projectNotiSupportDate.value} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="projectNotiHostDate">Host Date</Label>
+                        <Input type="text" name="projectNotiHostDate" id="projectNotiHostDate" data-key={noti} onChange={this.handleInputNotiChange} value={this.state.projectNoti[noti].projectNotiHostDate.value} />
+                    </FormGroup> 
+                </Jumbotron>
+        ))   
+
+        
     }
     render(){ 
+        console.log(this.state);
         return( 
             <Layout>
                 <Container>

@@ -30,9 +30,7 @@ class CardElement extends Component{
                             <CardNotification {...project_noti[noti][value]} />
                         </div>
                 ))
-        ))
-
-       
+        ))      
     }
 
     handleRemove() {    
@@ -63,7 +61,7 @@ class CardElement extends Component{
                             </div>
                         </div>
                         <div className="crd-footer text-right">
-                           <Button outline size="sm" className="mr-2" tag={Link} to={"Project/Edit/" + keyPrg}> Edit </Button>
+                            { /* <Button outline size="sm" className="mr-2" tag={Link} to={"Project/Edit/" + keyPrg}> Edit </Button> */}
                             <Button outline color="danger" size="sm" onClick={this.handleRemove}> Delete </Button>
                         </div>
                     </CardBody>
